@@ -1,0 +1,21 @@
+PROCEDURE "Unit4_session_variables"( )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   --READS SQL DATA 
+AS
+BEGIN
+	USING SQLSCRIPT_PRINT as LIB;
+	
+	declare my_ses_var int;	
+
+	set 'MY_SES_VAR' = 123; -- implicite convert to string
+
+	my_ses_var = session_context('MY_SES_VAR'); -- Def value is null
+	LIB:PRINT_LINE(my_ses_var);
+	
+	-- reset to null
+	unset 'MY_SES_VAR';
+	my_ses_var = session_context('MY_SES_VAR'); -- Def value is null
+	LIB:PRINT_LINE(my_ses_var);
+END

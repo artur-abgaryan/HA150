@@ -1,0 +1,135 @@
+PROCEDURE "Unit5_grouping"(in iv_owner nvarchar(3))
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+	SELECT
+		"Brand",
+		"Color",
+		AVG("HP")
+	FROM
+		"Car"
+	WHERE
+		"Owner" LIKE :iv_owner
+	GROUP BY
+		GROUPING SETS(("Brand"), ("Color"), ("Brand", "Color"));
+
+	SELECT
+		"Brand",
+		"Color",
+		AVG("HP")
+	FROM
+		"Car"
+	WHERE
+		"Owner" LIKE :iv_owner
+	GROUP BY
+		ROLLUP("Color", "Brand");
+
+	SELECT
+		"Brand",
+		"Color",
+		AVG("HP")
+	FROM
+		"Car"
+	WHERE
+		"Owner" LIKE :iv_owner
+	GROUP BY
+		CUBE("Color", "Brand");
+
+	SELECT
+		"Brand",
+		SUM("HP") AS "HP",
+		RANK() OVER (ORDER BY SUM("HP") DESC) AS "Rank"
+	FROM
+		"Car"
+	WHERE
+		"Owner" LIKE :iv_owner
+	GROUP BY
+		"Brand"
+	ORDER BY
+		"Rank";
+
+	SELECT
+		"Brand",
+		"Color",
+		SUM("HP") AS "HP",
+		RANK() OVER (PARTITION BY "Brand"
+					 ORDER BY SUM("HP") DESC) AS "Rank"
+	FROM
+		"Car"
+	WHERE
+		"Owner" LIKE :iv_owner
+	GROUP BY
+		"Brand",
+		"Color"
+	ORDER BY
+		"Brand",
+		"Rank";
+
+	SELECT
+		"Brand",
+		"HP",
+		SUM("HP") OVER (ORDER BY "Brand"
+						ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS "Cumulative total"
+	FROM
+		"Car"
+	WHERE
+		"Owner" LIKE :iv_owner
+	ORDER BY
+		"Brand";
+
+	SELECT
+		"Brand",
+		"Color",
+		"HP",
+		SUM("HP") OVER (PARTITION BY "Brand"
+						ORDER BY "Color"
+						ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS "Cumulative total"
+	FROM
+		"Car"
+	WHERE
+		"Owner" LIKE :iv_owner
+	ORDER BY
+		"Brand",
+		"Color";
+
+	SELECT
+		"Brand",
+		"HP",
+		ROUND(AVG("HP") OVER (ORDER BY "Brand"
+							  ROWS BETWEEN 2 PRECEDING AND CURRENT ROW), 2) AS "Moving AVG"
+	FROM
+		"Car"
+	WHERE
+		"Owner" LIKE :iv_owner
+	ORDER BY
+		"Brand";
+
+	SELECT
+		"Brand",
+		"Color",
+		"HP",
+		"HP" - SUM("HP") OVER (ORDER BY "Brand", "Color"
+							   ROWS BETWEEN 1 PRECEDING AND 1 PRECEDING) AS "Didderence"
+	FROM
+		"Car"
+	WHERE
+		"Owner" LIKE :iv_owner
+	ORDER BY
+		"Brand",
+		"Color";
+
+	SELECT
+		"Brand",
+		"HP",
+		"HP" - SUM("HP") OVER (ORDER BY "Brand"
+							   ROWS BETWEEN 1 PRECEDING AND 1 PRECEDING) AS "Didderence"
+	FROM
+		"Car"
+	WHERE
+		"Owner" LIKE :iv_owner
+	ORDER BY
+		"Color";
+
+END

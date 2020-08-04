@@ -1,0 +1,31 @@
+FUNCTION CONVERT_OFFICIALS_HOURS
+	( 
+		iv_filter nvarchar(1000),
+		iv_to nvarchar(1) 
+	)
+   RETURNS TABLE
+	(
+		PNr nvarchar(3),
+		Name nvarchar(20),
+		Overtime dec(5,2)
+	)
+   LANGUAGE SQLSCRIPT 
+   SQL SECURITY INVOKER AS 
+BEGIN 
+	DECLARE lv_filter nvarchar(1000) := iv_filter;
+	BEGIN
+		DECLARE EXIT HANDLER FOR SQLEXCEPTION
+		BEGIN
+			lv_filter := '';
+			lt_official = APPLY_FILTER("Official", :iv_filter);
+		END;
+		lt_official = APPLY_FILTER("Official", :iv_filter);
+	END;
+	
+	RETURN SELECT 
+				"PNR",
+				"NAME",
+				CONVERT_HOURS("OVERTIME", :iv_to) AS "OVERTIME"
+			FROM 
+				:lt_official;
+END;

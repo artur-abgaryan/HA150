@@ -1,0 +1,9 @@
+column table "Owner_EU" (
+	"Country"	nvarchar(1) not null comment 'Country code',
+	"OwnerId"	nvarchar(3) not null comment 'Owner identificator',
+	"Name"		nvarchar(150) not null comment 'Owner name',
+	"Birthday"	date null comment 'Owner birthday',
+	"City"		nvarchar(50) comment 'Owner city',
+	primary key("Country", "OwnerId")
+)
+comment 'Owner table (EU-Wide)'

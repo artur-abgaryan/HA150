@@ -1,0 +1,3 @@
+constraint FK_Contact_OwnerId
+on "Contact" 
+foreign key ("OwnerId") references "Owner" ("OwnerId") on update cascade

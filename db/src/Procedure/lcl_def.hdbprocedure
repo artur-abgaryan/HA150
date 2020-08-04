@@ -1,0 +1,15 @@
+PROCEDURE "lcl_def"( )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+	declare A "Car";
+	A = select * from "Car"; 			-- \$local.A_Scope1
+	begin
+		declare A "Official";
+		A = select * from "Official";	-- \$local.A_Scope2
+	end;
+   
+	select * from :A;
+END

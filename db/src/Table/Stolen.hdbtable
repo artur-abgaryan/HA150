@@ -1,0 +1,6 @@
+column table "Stolen" (
+	"PlateNumber" nvarchar(20) not null comment 'Plate number',
+	"Reported_at" date not null comment 'Reported date',
+	primary key("PlateNumber")
+)
+comment 'Stolen cars'

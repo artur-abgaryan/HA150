@@ -1,0 +1,3 @@
+constraint FK_Contact_PersNumber 
+on "Contact" 
+foreign key ("PersNumber") references "Official" ("PNR") on update cascade

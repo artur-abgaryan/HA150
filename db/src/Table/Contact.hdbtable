@@ -1,0 +1,6 @@
+column table "Contact" (
+	"PersNumber"	nvarchar(3) not null comment 'Personal number',
+	"OwnerId"		nvarchar(3) not null comment 'Owner identificator',
+	PRIMARY KEY("PersNumber", "OwnerId")
+)
+comment 'Contact table'

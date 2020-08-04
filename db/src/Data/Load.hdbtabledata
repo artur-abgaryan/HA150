@@ -1,0 +1,160 @@
+{
+	"format_version": 1,
+	"imports": [{
+		"target_table": "Official",
+		"source_data": {
+			"data_type": "CSV",
+			"file_name": "Official.csv",
+			"has_header": true,
+			"dialect": "HANA",
+			"type_config": {
+				"delimiter": ";"
+			}
+		},
+		"import_settings": {
+         	"include_filter" : [ ],		
+			"import_columns": ["PNR","NAME","OVERTIME","SALARY","MANAGER"]
+		},
+		"column_mappings": {
+			"PNR": 1,
+			"NAME": 2,
+			"OVERTIME": 3,
+			"SALARY": 4,
+			"MANAGER": 5
+		}
+	},
+	{
+		"target_table": "Owner",
+		"source_data": {
+			"data_type": "CSV",
+			"file_name": "Owner.csv",
+			"has_header": true,
+			"dialect": "HANA",
+			"type_config": {
+				"delimiter": ";"
+			}
+		},
+		"import_settings": {
+         	"include_filter" : [ ],		
+			"import_columns": ["OwnerId","Name","Birthday","City"]
+		},
+		"column_mappings": {
+			"OwnerId": 1,
+			"Name": 2,
+			"Birthday": 3,
+			"City": 4
+		}
+	},
+	{
+		"target_table": "Contact",
+		"source_data": {
+			"data_type": "CSV",
+			"file_name": "Contact.csv",
+			"has_header": true,
+			"dialect": "HANA",
+			"type_config": {
+				"delimiter": ";"
+			}
+		},
+		"import_settings": {
+         	"include_filter" : [ ],		
+			"import_columns": ["PersNumber","OwnerId"]
+		},
+		"column_mappings": {
+			"PersNumber": 1,
+			"OwnerId": 2
+		}
+	},
+	{
+		"target_table": "Stolen",
+		"source_data": {
+			"data_type": "CSV",
+			"file_name": "Stolen.csv",
+			"has_header": true,
+			"dialect": "HANA",
+			"type_config": {
+				"delimiter": ";"
+			}
+		},
+		"import_settings": {
+         	"include_filter" : [ ],		
+			"import_columns": ["PlateNumber","Reported_at"]
+		},
+		"column_mappings": {
+			"PlateNumber": 1,
+			"Reported_at": 2
+		}
+	},
+	{
+		"target_table": "Car",
+		"source_data": {
+			"data_type": "CSV",
+			"file_name": "Car.csv",
+			"has_header": true,
+			"dialect": "HANA",
+			"type_config": {
+				"delimiter": ";"
+			}
+		},
+		"import_settings": {
+         	"include_filter" : [ ],		
+			"import_columns": ["CarId","PlateNumber","Brand","Color","HP","Owner"]
+		},
+		"column_mappings": {
+			"CarId": 1,
+			"PlateNumber": 2,
+			"Brand": 3,
+			"Color": 4,
+			"HP": 5,
+			"Owner": 6
+		}
+	},
+	{
+		"target_table": "Car_EU",
+		"source_data": {
+			"data_type": "CSV",
+			"file_name": "Car_EU.csv",
+			"has_header": true,
+			"dialect": "HANA",
+			"type_config": {
+				"delimiter": ";"
+			}
+		},
+		"import_settings": {
+         	"include_filter" : [ ],		
+			"import_columns": ["CarId","PlateNumber","Brand","Color","HP","Country","Owner"]
+		},
+		"column_mappings": {
+			"CarId": 1,
+			"PlateNumber": 2,
+			"Brand": 3,
+			"Color": 4,
+			"HP": 5,
+			"Country": 6,
+			"Owner": 7
+		}
+	},
+	{
+		"target_table": "Owner_EU",
+		"source_data": {
+			"data_type": "CSV",
+			"file_name": "Owner_EU.csv",
+			"has_header": true,
+			"dialect": "HANA",
+			"type_config": {
+				"delimiter": ";"
+			}
+		},
+		"import_settings": {
+         	"include_filter" : [ ],		
+			"import_columns": ["Country","OwnerId","Name","Birthday","City"]
+		},
+		"column_mappings": {
+			"Country": 1,
+			"OwnerId": 2,
+			"Name": 3,
+			"Birthday": 4,
+			"City": 5
+		}
+	}]
+}

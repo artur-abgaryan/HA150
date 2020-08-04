@@ -1,0 +1,20 @@
+PROCEDURE "build_emp_list"(
+	out et_emp table(emp_id nvarchar(10),
+					"name.first" nvarchar(10),
+					"name.last" nvarchar(10),
+					salamount integer))
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+	et_emp.emp_id[1]		= '10001';
+	et_emp."name.first"[1]	= 'Mickey';
+	et_emp."name.last"[1]	= 'Mouse';
+	et_emp.salamount[1]		= 2000;
+
+	et_emp.emp_id[2]		= '10002';
+	et_emp."name.first"[2]	= 'Donald';
+	et_emp."name.last"[2]	= 'Duck';
+	et_emp.salamount[2]		= 3000;
+END

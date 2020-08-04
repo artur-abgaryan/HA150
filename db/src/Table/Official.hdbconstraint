@@ -1,0 +1,3 @@
+CONSTRAINT "FK_Official_Manager" 
+ON "Official"
+FOREIGN KEY ("MANAGER") REFERENCES "Official" ("PNR") ON UPDATE CASCADE

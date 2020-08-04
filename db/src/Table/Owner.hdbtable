@@ -1,0 +1,8 @@
+column table "Owner" (
+	"OwnerId"	nvarchar(3) unique not null comment 'Owner identificator',
+	"Name"		nvarchar(150) not null comment 'Owner name',
+	"Birthday"	date null comment 'Owner birthday',
+	"City"		nvarchar(50) comment 'Owner city',
+	primary key("OwnerId")
+)
+comment 'Owner table'

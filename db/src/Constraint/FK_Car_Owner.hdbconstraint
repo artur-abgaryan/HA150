@@ -1,0 +1,3 @@
+CONSTRAINT FK_Car_Owner
+ON "Car"
+FOREIGN KEY ("Owner") REFERENCES "Owner" ("OwnerId") ON UPDATE CASCADE

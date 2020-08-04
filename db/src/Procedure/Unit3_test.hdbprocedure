@@ -1,0 +1,12 @@
+PROCEDURE "Unit3_test"( )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+	declare lt_car "Car";
+	exec 'select * from "Car"' into lt_car;
+	select * from :lt_car;
+	
+	execute immediate 'select * from "Car"';
+END

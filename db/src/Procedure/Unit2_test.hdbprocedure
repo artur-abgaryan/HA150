@@ -1,0 +1,33 @@
+PROCEDURE "Unit2_test"( )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY DEFINER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+	-- using mylib as lib;
+	
+	-- declare lt_result table(col1 int);
+	-- lib:get_data2(lib:maxval, :lt_result);
+	-- select * from :lt_result;
+	
+	--declare filterin varchar(1000):='birthday is not null';
+	--select * from "Owner" where "Birthday" is not null;
+	--print filterin;
+	--filterout = APPLY_FILTER(Owner, filterin);
+	
+	--select * from CONVERT_OFFICIALS_HOURS('Name like ''%Ms%''','d');
+	
+	declare lv_message nvarchar(200);
+
+	CALL "Convert_OfficialsHours"(
+		IV_FILTER => 'Name like ''%Mr%''',
+		IV_TO => 'd',
+		ET_OFFICIAL => lt_official,
+		EV_MESSAGE => lv_message
+	);
+	
+	select * from :lt_official;
+	
+	-- select * from "SYS"."LIBRARIES";
+	-- select * from "SYS"."LIBRARY_MEMBERS";
+END

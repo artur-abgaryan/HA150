@@ -1,0 +1,15 @@
+Country;OwnerId;Name;Birthday;City
+D;H01;Ms T;20.06.1934;Wiesloch
+D;H02;Ms U;11.05.1966;Hockenhiem
+D;H03;SAP AG;;Walldorf
+D;H04;HDM AG;;Heidelberg
+D;H05;Mr V;21.04.1952;Leimen
+D;H06;Ms W;01.06.1958;Wiesloch
+D;H07;IKEA;;Walldorf
+D;H08;Mr X;30.08.1986;Walldorf
+D;H09;Ms Y;10.02.1986;Sinsheim
+D;H10;Mr Z;03.02.1986;Ladenburg
+A;H01;Ms O;21.05.1977;Wien
+A;H02;Mr P;02.08.1977;Salzburg
+E;H01;Senor Q;18.02.1925;Madrid
+E;H02;Senora R;27.02.1927;Barcelona

@@ -1,0 +1,34 @@
+PROCEDURE "Convert_OfficialsHours"(
+	IN iv_filter	nvarchar(1000),
+	IN iv_to		nvarchar(1),
+	OUT et_official TABLE (PNr nvarchar(3),
+							Name nvarchar(20),
+							Overtime dec(5,2)),
+	OUT ev_message nvarchar(200) )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+	declare lv_filter nvarchar(1000) := :iv_filter;
+	begin
+		declare exit handler for sqlexception
+		begin
+			lv_filter = '';
+			lt_official = apply_filter("Official", :lv_filter);
+			
+			ev_message = 'Resilt not filtered because SQL Error '
+				|| ::SQL_ERROR_CODE || ' ' || ::SQL_ERROR_MESSAGE;
+		end;
+	
+		lt_official = apply_filter("Official", :lv_filter);
+	end;
+	
+	et_official = select
+		PNr,
+		Name,
+		CONVERT_HOURS(Overtime, :iv_to) AS Overtime
+	from
+		:lt_official;
+   
+END

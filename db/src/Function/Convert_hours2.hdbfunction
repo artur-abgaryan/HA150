@@ -1,0 +1,22 @@
+FUNCTION "Convert_hours2"( iv_hours integer,
+						   iv_to nvarchar(1) )
+       RETURNS table ( result dec(5,2) )
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+	declare lt_unit nvarchar(1) array;
+	declare lt_factor dec(5,2) array;
+	
+	lt_unit[1] := 'm';	lt_factor[1] := 60;
+	lt_unit[2] := 'h';	lt_factor[2] := 1;
+	lt_unit[3] := 'd';	lt_factor[3] := 1.0/24.0;
+	
+	lt_conversiton = unnest(:lt_unit, :lt_factor) as (Unit, Factor);
+	
+	return select
+		coalesce(Factor, 1.0) * iv_hours as result
+	from
+		:lt_conversiton
+	where
+		Unit = :iv_to;
+END;

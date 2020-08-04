@@ -1,0 +1,15 @@
+PROCEDURE "Colorhpcars"( IN iv_hpval INTEGER, in iv_selclr NVARCHAR(10) )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+	lt_overhp = SELECT * FROM "Car" WHERE "HP" > :iv_hpval;				-- Q1
+	lt_selcar = SELECT * FROM :lt_overhp WHERE "Color" = :iv_selclr;	-- Q2
+	
+	lt_bmwhp = SELECT COUNT(*) FROM :lt_selcar WHERE "Brand" = 'BMW';	-- Q3
+	lt_noowner = SELECT *FROM :lt_selcar WHERE "Owner" IS NULL;		-- Q4
+	
+	SELECT * FROM :lt_bmwhp;
+	SELECT * FROM :lt_noowner;
+END

@@ -1,0 +1,24 @@
+CarId;PlateNumber;Brand;Color;HP;Country;Owner
+F01;HD-V 106;Fiat;red;75;D;H06
+F02;HD-VW 4711;VW;black;120;D;H03
+F03;HD-JA 1972;BMW;blue;184;D;H03
+F04;HD-AL 1002;Mercedes;white;136;D;H07
+F05;HD-MM 3206;Mercedes;black;170;D;H03
+F06;HD-VW 1999;Audi;yellow;260;D;H05
+F07;HD-ML 3206;Audi;blue;116;D;H03
+F08;HD-IK 1002;VW;black;160;D;H07
+F09;HD-UP 13;Scoda;red;105;D;H02
+F10;HD-MT 507;BMW;black;140;D;H04
+F11;HD-MM 208;BMW;green;184;D;H02
+F12;HD-XY 4711;Scoda;red;105;D;H04
+F13;HD-IK 1001;Renault;red;136;D;H07
+F14;HD-MM 1977;Mercedes;white;170;D;H03
+F15;HD-MB 3030;Scoda;black;136;D;H03
+F16;;Opel;green;120;;
+F17;HD-Y 333;Audi;red;184;D;H09
+F18;HD-MQ 2006;Renault;black;90;D;H03
+F19;HD-VW 2012;VW;red;125;D;H01
+F20;;Audi;green;184;;
+F21;W-302 ML;Mercedes;black;170;A;H01
+F22;S-215 MM;VW;silver;184;;H02
+F23;1405 5MM;Audi;blue;116;E;H01

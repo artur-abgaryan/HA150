@@ -1,0 +1,26 @@
+PROCEDURE "CarOwner_Count"( OUT ev_company_cars integer,
+							OUT ev_private_cars integer)
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+   lt_companies = select "OwnerId" as OwnerId from "Owner" where "Birthday" is null;
+   lt_persons	= select "OwnerId" as OwnerId from "Owner" where "Birthday" is not null;
+   lt_cars		= select * from "Car" where "PlateNumber" 
+					not in (select "PlateNumber" from "Stolen");
+					
+	select
+		Count(*)
+	into ev_company_cars
+	from
+		:lt_cars as cars
+		inner join :lt_companies as companies on (companies.OwnerId = cars."Owner");
+
+	select
+		Count(*)
+	into ev_private_cars
+	from
+		:lt_cars as cars
+		inner join :lt_persons as persons on (persons.OwnerId = cars."Owner");
+END

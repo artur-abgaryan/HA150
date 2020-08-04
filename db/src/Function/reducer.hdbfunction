@@ -1,0 +1,12 @@
+FUNCTION "reducer"(in iv_c nvarchar, in it_values table(id int, freq int))
+       RETURNS table (c nvarchar, stmt_freq int, total_freq int)
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+	return select
+			:iv_c as c,
+			count(distinct(id)) as stmt_freq,
+			sum(freq) as total_freq
+		from
+			:it_values;
+END;

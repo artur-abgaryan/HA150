@@ -1,0 +1,72 @@
+PROCEDURE "Unit4_Imperative_logic"( )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+	using sqlscript_print as lib;
+
+	-- IF END IF
+	begin
+		declare lv_depid constant nvarchar(3) = 'A02';
+		declare lv_remainderdays constant int = 100;
+		declare lv_result int;
+	
+		lib:print_line('IF END IF');
+
+		if :lv_depid = 'A01'
+			then lv_result = :lv_remainderdays * 350;
+		elseif :lv_depid = 'A02'
+			then lv_result = :lv_remainderdays * 310;
+		elseif :lv_depid = 'A03'
+			then lv_result = :lv_remainderdays * 290;
+		elseif :lv_depid = 'A04'
+			then lv_result = :lv_remainderdays * 325;
+		else lv_result = :lv_remainderdays * 300;
+		end if; 
+		lib:print_line(lv_result);
+	end;
+	
+	-- WHILE
+	begin
+		declare lv_index1 int default 0;
+		declare lv_index2 int default 0;
+		declare x int default 0;
+	
+		lib:print_line('WHILE');
+
+		WHILE :lv_index1 < 5 DO
+			lv_index2 := 0;
+			WHILE :lv_index2 < 5 DO
+			
+				lib:print_line('Index2: ' || :lv_index2);
+				lv_index2 := lv_index2 + 1;
+			END WHILE;
+			
+			lib:print_line('Index1: ' || :lv_index1);
+			lv_index1 := lv_index1 + 1;
+		END WHILE;
+		
+		-- FOR
+		lib:print_line('FOR');
+	
+		FOR lv_index1 IN -2 .. 2 DO
+			lib:print_line('Index1: ' || :lv_index1);
+			FOR lv_index2 IN REVERSE 0 .. 5 DO
+				lib:print_line('Index2: ' || :lv_index2);
+			END FOR;
+		END FOR;
+		
+		FOR x IN 0 .. 10 DO
+			IF :x < 3 THEN
+				lib:print_line('continue: ' || :x);
+				continue;
+			end if;
+			
+			if :x = 5 then
+				lib:print_line('break: ' || :x);
+				break;
+			end if;
+		END FOR;
+	end;
+END

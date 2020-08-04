@@ -1,0 +1,3 @@
+CONSTRAINT FK_Car_EU_Country_Owner
+ON "Car_EU"
+FOREIGN KEY ("Country", "Owner") REFERENCES "Owner_EU" ("Country", "OwnerId") ON UPDATE CASCADE

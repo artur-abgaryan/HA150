@@ -1,0 +1,49 @@
+PROCEDURE "Unit6_hierarchy"(in iv_start nvarchar(50) )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   --READS SQL DATA 
+AS
+BEGIN
+
+	CREATE LOCAL TEMPORARY COLUMN TABLE #hier ( Parent VARCHAR(2), ID VARCHAR(2), Type VARCHAR(1), Ord INTEGER, Amount INTEGER );
+
+	INSERT INTO #hier VALUES ( null, 'A1', 'a', 1, 50 );
+	INSERT INTO #hier VALUES ( 'A1', 'B1', 'b', 1, 120 );
+	INSERT INTO #hier VALUES ( 'A1', 'B2', 'c', 2, 90 );
+	INSERT INTO #hier VALUES ( 'B1', 'C1', 'a', 1, 40 );
+	INSERT INTO #hier VALUES ( 'B1', 'C2', 'b', 2, 60 );
+	INSERT INTO #hier VALUES ( 'B2', 'C3', 'c', 3, 75 );
+	INSERT INTO #hier VALUES ( 'B2', 'C4', 'a', 4, 30 );
+	INSERT INTO #hier VALUES ( 'C3', 'D1', 'b', 1, 10 );
+	INSERT INTO #hier VALUES ( 'C3', 'D2', 'c', 2, 25 );
+	INSERT INTO #hier VALUES ( 'C4', 'D3', 'a', 3, 30 );
+	INSERT INTO #hier VALUES ( null, 'A2', 'b', 2, 80 );
+	INSERT INTO #hier VALUES ( 'A2', 'B3', 'c', 3, 45 );
+	INSERT INTO #hier VALUES ( 'A2', 'C4', 'a', 4, 30 );
+
+	WITH "HIER" AS
+	(
+		SELECT
+			*
+		FROM
+			HIERARCHY( SOURCE( SELECT
+								parent AS parent_id,
+								id AS node_id,
+								type
+							FROM
+								#hier ) )
+		ORDER BY 
+			HIERARCHY_RANK
+	)
+	SELECT
+		*
+	FROM
+		"HIER";
+		-- HIERARCHY_DESCENDANTS (
+		-- 	SOURCE "HIER"
+		-- 	START WHERE node_id = :iv_start
+		-- );
+		
+	DROP TABLE #hier;
+END

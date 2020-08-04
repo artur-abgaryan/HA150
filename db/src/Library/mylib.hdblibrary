@@ -1,0 +1,18 @@
+library mylib
+as
+begin
+	public variable maxval constant int = 100;
+	
+	public function bound_with_maxval(i int) returns x int
+	as
+	begin
+		x = case when :i > :maxval then :maxval else :i end;
+	end;
+	
+	public procedure get_data2(in iv_size int, out et_result table(col1 int))
+	as
+	begin
+		et_result = select top :iv_size "HP" as col1 from "Car";
+--		et_result = select top :iv_size col1 from data_table;
+	end;
+end;

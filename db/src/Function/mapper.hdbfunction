@@ -1,0 +1,19 @@
+FUNCTION "mapper"( in iv_id int, in iv_sentence nvarchar(5000) )
+       RETURNS TABLE (id int, c nvarchar, freq int)
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+    using sqlscript_string as lib;
+    
+    declare lt_sentence table (result nvarchar);
+    
+    lt_sentence = lib:split_to_table(:iv_sentence, ',');
+    return select 
+    		:iv_id as id, 
+    		result as c, 
+    		count(result) as freq
+		from
+			:lt_sentence
+		group by
+			result;
+END;

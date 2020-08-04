@@ -1,0 +1,11 @@
+column table "Car_EU" (
+	"CarId" 		nvarchar(3) unique not null comment 'Car identificator',
+	"PlateNumber"	nvarchar(20) null comment 'Plate number',
+	"Brand" 		nvarchar(50) not null comment 'Brand',
+	"Color" 		nvarchar(20) not null comment 'Car color',
+	"HP"			int not null comment 'HP',
+	"Country"		nvarchar(1) null comment 'Country code',
+	"Owner" 		nvarchar(3) null comment 'Car owner',
+	primary key("CarId")
+)
+comment 'Car table'

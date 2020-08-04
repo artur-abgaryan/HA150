@@ -1,0 +1,20 @@
+PROCEDURE "Unit2_map_reduce"( )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+	declare lt_tab table (id int, secvence nvarchar(5000));
+	declare lt_result table (c nvarchar, stmt_freq int, total_freq int);
+
+	insert into :lt_tab values(1, 'A,B');
+	insert into :lt_tab values(2, 'B,E,F');
+	insert into :lt_tab values(3, 'F,C');
+	insert into :lt_tab values(4, 'A,A');
+	insert into :lt_tab values(5, 'A,B,B');
+	insert into :lt_tab values(6, 'E,F');
+	
+	lt_result = MAP_REDUCE(:lt_tab,	"mapper"(:lt_tab.id, :lt_tab.secvence) group by c as x, 
+									"reducer"(x.c, x));
+	select * from :lt_result order by c;
+END
